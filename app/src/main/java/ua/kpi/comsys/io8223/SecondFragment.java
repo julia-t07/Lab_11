@@ -19,6 +19,7 @@ import com.llollox.androidtoggleswitch.widgets.ToggleSwitch;
 import java.util.ArrayList;
 import java.util.List;
 public class SecondFragment extends Fragment {
+    private static int state;
     private GraphView coordPlot;
     private PieChart pieChart;
     private ToggleSwitch toggleSwitch;
@@ -39,13 +40,19 @@ public class SecondFragment extends Fragment {
             public void onToggleSwitchChanged(int position) {
                 if (position == 0) {
                     Plot();
+                    state = 0;
+
                 } else {
                     Diagram();
+                    state = 1;
                 }
             }
         });
-        toggleSwitch.setCheckedPosition(0);
-        Plot();
+        toggleSwitch.setCheckedPosition(state);
+        if (state == 0)
+            Plot();
+        else
+            Diagram();
     }
     public void Plot() {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
